@@ -12,11 +12,18 @@
   <title>Anurag's Portfolio</title>
 </head>
 <body class="h-full w-full bg-gradient-to-r from-gray-800 via-slate-800 to-black">
-  <nav class="w-full h-16 fixed top-0 bg-black bg-opacity-40 text-white flex flex-col md:flex-row justify-between items-center z-50">
+  <nav class="w-full h-16 fixed top-0 bg-black bg-opacity-40 text-white flex justify-between items-center z-50 px-4">
     <div class="mx-3 my-3">
       <p class="pl-3 font-thin text-2xl md:text-3xl">P O R T F O L I O</p>
     </div>
-    <div class="ml-auto py-2 px-5 text-gray-300 flex flex-wrap justify-center space-x-4 md:space-x-8 text-sm md:text-base">
+    <div class="md:hidden">
+      <button id="menu-toggle" class="text-gray-300 focus:outline-none">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+    <div id="nav-links" class="hidden md:flex ml-auto py-2 px-5 text-gray-300 space-x-8 text-sm md:text-base">
       <a href="#HOME" class="m-2 hover:text-blue-300 hover:scale-110 transition-transform">HOME</a>
       <a href="#abt" class="m-2 hover:text-blue-300 hover:scale-110 transition-transform">ABOUT ME</a>
       <a href="#tech" class="m-2 hover:text-blue-300 hover:scale-110 transition-transform">TECHNOLOGIES</a>
@@ -25,6 +32,22 @@
       <a href="#conn" class="m-2 hover:text-blue-300 hover:scale-110 transition-transform">CONNECT ME</a>
     </div>
   </nav>
+
+  <div id="side-panel" class="fixed inset-y-0 right-0 w-64 bg-black bg-opacity-90 text-white transform translate-x-full transition-transform duration-300 ease-in-out z-50 md:hidden">
+    <button id="close-menu" class="absolute top-4 left-4 text-gray-300 focus:outline-none">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+    <div class="flex flex-col items-center space-y-6 pt-16">
+      <a href="#HOME" class="text-lg hover:text-blue-300 hover:scale-110 transition-transform">HOME</a>
+      <a href="#abt" class="text-lg hover:text-blue-300 hover:scale-110 transition-transform">ABOUT ME</a>
+      <a href="#tech" class="text-lg hover:text-blue-300 hover:scale-110 transition-transform">TECHNOLOGIES</a>
+      <a href="#pro" class="text-lg hover:text-blue-300 hover:scale-110 transition-transform">PROJECTS</a>
+      <a href="#con" class="text-lg hover:text-blue-300 hover:scale-110 transition-transform">CONTACT ME</a>
+      <a href="#conn" class="text-lg hover:text-blue-300 hover:scale-110 transition-transform">CONNECT ME</a>
+    </div>
+  </div>
 
   <div id="HOME" class="w-full min-h-screen flex flex-col md:flex-row items-center justify-center md:space-x-10 px-4 md:px-16 py-20">
     <div class="order-2 md:order-1 mt-8 md:mt-0">
@@ -182,7 +205,7 @@
       <div class="group flex flex-col md:flex-row items-center space-x-4">
         <img src="public/logos/Journey.png" alt="Journey" class="w-32 h-20 border rounded-lg group-hover:scale-105" />
         <div class="text-center md:text-left">
-          <a href="https://anuragad179.github.io/Journey/" target="_blank">
+          modifiable href="https://anuragad179.github.io/Journey/" target="_blank">
             <h1 class="text-neutral-400 text-xl font-semibold group-hover:text-2xl hover:text-purple-300">Journey</h1>
           </a>
           <p class="text-white text-base">"This project isn’t intended for official or professional purposes; It’s a legacy for my Descendants. Whenever they visit this website, they’ll come to know me and the story of my Life. After I'm gone, this site will stand as proof of who I was, my Journey, and my Achievements."</p>
@@ -228,8 +251,7 @@
       </form>
     </div>
   </div>
-
-  <div id="conn" class="w-full py-20 px-4 md:px-20">
+<div id="conn" class="w-full py-20 px-4 md:px-20">
     <div class="text-center">
       <p class="text-3xl md:text-4xl text-transparent bg-gradient-to-r from-slate-50 via-slate-500 to-gray-400 bg-clip-text">
         C O N N E C T <span class="pl-5">M E</span>
@@ -284,6 +306,23 @@
   </div>
 
   <script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const sidePanel = document.getElementById('side-panel');
+    const closeMenu = document.getElementById('close-menu');
+
+    menuToggle.addEventListener('click', () => {
+      sidePanel.classList.toggle('translate-x-full');
+    });
+
+    closeMenu.addEventListener('click', () => {
+      sidePanel.classList.add('translate-x-full');
+    });
+    document.querySelectorAll('#side-panel a').forEach(link => {
+      link.addEventListener('click', () => {
+        sidePanel.classList.add('translate-x-full');
+      });
+    });
+
     (function(){
       function c(){
         var b = a.contentDocument || a.contentWindow.document;
